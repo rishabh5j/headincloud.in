@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes - headincloud.in</title><meta name="Description" content=""><meta property="og:title" content="Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes" />
+<meta property="og:description" content="When we talk about designing highly available applications or architecture on public cloud, SLA is one of the single most important component to determine the service availability. It’s calculation and outcome directly influences the business and customer-service provider trust. Let’s give some time understanding it better. Service Level Agreement is a commitment or agreement between customer and the service provider(of sorts) which calculates the standard of service being offered. Failing to meet these standards would mean a financial reimbursement or service credits being incurred on the service-provider." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/" /><meta property="og:image" content="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-19T12:01:00+05:30" />
+<meta property="article:modified_time" content="2022-05-19T12:01:00+05:30" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png"/>
+<meta name="twitter:title" content="Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes"/>
+<meta name="twitter:description" content="When we talk about designing highly available applications or architecture on public cloud, SLA is one of the single most important component to determine the service availability. It’s calculation and outcome directly influences the business and customer-service provider trust. Let’s give some time understanding it better. Service Level Agreement is a commitment or agreement between customer and the service provider(of sorts) which calculates the standard of service being offered. Failing to meet these standards would mean a financial reimbursement or service credits being incurred on the service-provider."/>
+<meta name="application-name" content="headincloud.in">
+<meta name="apple-mobile-web-app-title" content="headincloud.in">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/" /><link rel="prev" href="http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/" /><link rel="next" href="http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Service Level Agreement(SLA) : Implications, evaluation \u0026 business outcomes",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.headincloud.in\/posts\/sla-implications-evaluation-and-business-outcomes\/"
+        },"genre": "posts","keywords": "tech, Azure","wordcount":  496 ,
+        "url": "http:\/\/www.headincloud.in\/posts\/sla-implications-evaluation-and-business-outcomes\/","datePublished": "2022-05-19T12:01:00+05:30","dateModified": "2022-05-19T12:01:00+05:30","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"authors": [{
+                    "@type": "Person",
+                    "name": "Rishabh Jain"
+                }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="headincloud.in">headincloud.in</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Blog posts from the admin"> Posts </a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology"> Tags </a><a class="menu-item" href="/categories/" title="Tech categories"> Categories </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="headincloud.in">headincloud.in</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog posts from the admin">Posts</a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology">Tags</a><a class="menu-item" href="/categories/" title="Tech categories">Categories</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.headincloud.in/authors/rishabh-jain'>Rishabh Jain</a></span>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-19">2022-05-19</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-05-19">2022-05-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;496 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png"
+        data-srcset="/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png, /posts/sla-implications-evaluation-and-business-outcomes/featured-image.png 1.5x, /posts/sla-implications-evaluation-and-business-outcomes/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png"
+        title="/posts/sla-implications-evaluation-and-business-outcomes/featured-image.png" height="475" width="888"></div><div class="content" id="content"><p><br>
+<br>
+When we talk about designing highly available applications or architecture on public cloud, SLA is one of the <strong>single most important component</strong> to determine the service availability. It’s calculation and outcome directly influences the business and customer-service provider trust. Let’s give some time understanding it better.
+<br>
+<br>
+Service Level Agreement is a <strong>commitment or agreement</strong> between customer and the service provider(of sorts) which calculates the standard of service being offered. Failing to meet these standards would mean a financial reimbursement or service credits being incurred on the service-provider.
+<br>
+<br>
+<strong>Choosing the right SLO :</strong> Before we dig deeper, it’s more important to understand what Service Level Objectives(SLO) are. SLOs are the pre-determined metrics that are used to define availability and reliability of service. Let’s take an example. Company A is a e-commerce organization, which hosts it’s API gateway on public cloud provider B. Any failures to entertain the new order requests via API directly translates to revenue loss. It makes sense for the customer A and provider B to accept requests processed per hour as the agreed SLO. Let’s skew the requirements a bit more and assume A is a trading platform to facilitating stock market trading. In such a scenario, request processing latency is of paramount importance, and qualifies for SLO as well. Since SLOs are the defining metrics for SLA, collecting these values on a reqular interval at pre-defined rate is quintessential.
+<br>
+<br>
+<strong>Calculating the SLA :</strong> Selection of the right SLO is half a battle won. Now let’s look at the SLA calculation. Company A anticipates around 10k new orders via API calls. Senior management in Company A decides: failure to accept more than 100 requests per year lead to breach of trust with their end consumers and look real bad on their reputation. That would mean 0.1% failure per year, or 99.9% calculated SLA. From service availability standpoint, a 99.9% SLA would mean service is down for ~9 hours in a year.
+<br>
+<br>
+<strong>More is better? :</strong> But why not expect a higher SLA from service provider? More is good, right? Wrong. With each increasing 9, the availability time improves drastically (for instance 99.99% availability would mean only 10 new order requests failing in a year, out of 10K in the context of example aforementioned) but it does introduces a lot of complexity in the architecture and subsequently increases the cost — both deployment and operational. Increasing availability requirement mandates each contributing service or component to provide equal reliability, else it puts the entire solution at the risk to meet the commited SLA. For instance, higher SLA requirement from a API interface would mean choosing carefully the backend messaging queue and the database instance as well, and provide necessary redundancy wherever required.
+<br>
+<br>
+Hence, it is upto the business to draw a fine line between expected level of reliability AND growing complexity to attain higher reliability. Keeping unrealistic SLA target tends to be counter-productive and may lead to tightly coupled applications.</p>
+<hr>
+<p><em>Reference :</em>
+<em>Originally published at: <a href="https://www.linkedin.com/pulse/service-level-agreementsla-implications-evaluation-business-jain/" target="_blank" rel="noopener noreffer">https://www.linkedin.com/pulse/service-level-agreementsla-implications-evaluation-business-jain/</a></em></p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-05-19</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tech/">tech</a>,&nbsp;<a href="/tags/azure/">Azure</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/" class="prev" rel="prev" title="Alexa Ask Azure Cloud to Create a Linux Vm"><i class="fas fa-angle-left fa-fw"></i>Alexa Ask Azure Cloud to Create a Linux Vm</a>
+            <a href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/" class="next" rel="next" title="Building a Scalable and Reliable E Commerce Website on Azure">Building a Scalable and Reliable E Commerce Website on Azure<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.0-DEV">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+
+<div class="pjax-assets"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script></div>
+</body>
+
+</html>

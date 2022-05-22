@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Alexa Ask Azure Cloud to Create a Linux Vm - headincloud.in</title><meta name="Description" content=""><meta property="og:title" content="Alexa Ask Azure Cloud to Create a Linux Vm" />
+<meta property="og:description" content="Wouldn&rsquo;t it be amazing if you could create resources on Azure with just one voice command?! In this step-by-step guide, I list and explain the detailed steps for achieving this. On a high level, below is the proceedure : Write a new Alexa Skill using python sdk and run it on a Azure VM/Azure Web App/Azure function. Expose this skill using flask API/Web apps native API. (Reference : https://github.com/rishabh5j/alexa-azure-integration ) Integrate the Alexa skill with python wrapper for Azure sdk, to enable provisioning resources using ARM templates." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/" /><meta property="og:image" content="http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-17T19:28:00+05:30" />
+<meta property="article:modified_time" content="2022-05-17T19:28:00+05:30" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png"/>
+<meta name="twitter:title" content="Alexa Ask Azure Cloud to Create a Linux Vm"/>
+<meta name="twitter:description" content="Wouldn&rsquo;t it be amazing if you could create resources on Azure with just one voice command?! In this step-by-step guide, I list and explain the detailed steps for achieving this. On a high level, below is the proceedure : Write a new Alexa Skill using python sdk and run it on a Azure VM/Azure Web App/Azure function. Expose this skill using flask API/Web apps native API. (Reference : https://github.com/rishabh5j/alexa-azure-integration ) Integrate the Alexa skill with python wrapper for Azure sdk, to enable provisioning resources using ARM templates."/>
+<meta name="application-name" content="headincloud.in">
+<meta name="apple-mobile-web-app-title" content="headincloud.in">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/" /><link rel="prev" href="http://www.headincloud.in/posts/how-managed-identities-work-on-azure-resources/" /><link rel="next" href="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Alexa Ask Azure Cloud to Create a Linux Vm",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.headincloud.in\/posts\/alexa-ask-azure-cloud-create-a-linux-vm\/"
+        },"genre": "posts","keywords": "tech, Azure, Alexa, NLP","wordcount":  1281 ,
+        "url": "http:\/\/www.headincloud.in\/posts\/alexa-ask-azure-cloud-create-a-linux-vm\/","datePublished": "2022-05-17T19:28:00+05:30","dateModified": "2022-05-17T19:28:00+05:30","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"authors": [{
+                    "@type": "Person",
+                    "name": "Rishabh Jain"
+                }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="headincloud.in">headincloud.in</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Blog posts from the admin"> Posts </a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology"> Tags </a><a class="menu-item" href="/categories/" title="Tech categories"> Categories </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="headincloud.in">headincloud.in</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog posts from the admin">Posts</a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology">Tags</a><a class="menu-item" href="/categories/" title="Tech categories">Categories</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Alexa Ask Azure Cloud to Create a Linux Vm</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.headincloud.in/authors/rishabh-jain'>Rishabh Jain</a></span>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-17">2022-05-17</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-05-17">2022-05-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1281 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png"
+        data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png, /posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png"
+        title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/featured-image.png" height="565" width="999"></div><div class="content" id="content"><p>Wouldn&rsquo;t it be amazing if you could create resources on Azure with just one voice command?!
+<br>
+<br>
+<br>
+In this step-by-step guide, I list and explain the detailed steps for achieving this. On a high level, below is the proceedure :
+<br>
+<br>
+Write a new Alexa Skill using python sdk and run it on a Azure VM/Azure Web App/Azure function. Expose this skill using flask API/Web apps native API. (Reference : <a href="https://github.com/rishabh5j/alexa-azure-integration" target="_blank" rel="noopener noreffer">https://github.com/rishabh5j/alexa-azure-integration</a> )
+Integrate the Alexa skill with python wrapper for Azure sdk, to enable provisioning resources using ARM templates. (Reference : <a href="https://github.com/rishabh5j/azure-python-arm-deployer" target="_blank" rel="noopener noreffer">https://github.com/rishabh5j/azure-python-arm-deployer</a> - available at pypi to enable pip install)
+<br>
+<br>
+Create a custom Alexa skill on Alexa developer console, with custom backend endpoint API (created in step 1). We will use a custom Invocation name &ldquo;azure cloud&rdquo; and intents to make voice command. More on that later. (Reference steps as : <a href="https://developer.amazon.com/en-US/docs/alexa/custom-skills/steps-to-build-a-custom-skill.html" target="_blank" rel="noopener noreffer">https://developer.amazon.com/en-US/docs/alexa/custom-skills/steps-to-build-a-custom-skill.html</a> )</p>
+<p><br>
+<br>
+Alexa skill is structured in format of Invocation, intent and slots.
+<br>
+<br>
+Invocation is the 2 worded command to invoke your skill. In our example, we will use azure cloud as the invocation keywords.
+Intent is the verb based on which the API calls take pre-defined actions. for eg: create, destroy, etc. In our case, we use &ldquo;create&rdquo; intent to create new resources.
+<br>
+<br>
+Slots are the variables which are passed from Alexa NLU(Natural language Understanding) to backend-api , so that we can perform operations on the slot value. For eg: if the skills api is performing addition operation a(value:2)+b(value:3) , we should have a &amp; b as slot names, and voice command should map 2 &amp; 3 as the respective values for these slots. In our use-case, we will use slot name: resourceName which can have values such as &ldquo;linux VM&rdquo;, &ldquo;storage&rdquo;, &ldquo;windows VM&rdquo; etc. (for more details on heirarchy of the request body syntax in <a href="https://developer.amazon.com/en-US/docs/alexa/custom-skills/request-and-response-json-reference.html" target="_blank" rel="noopener noreffer">https://developer.amazon.com/en-US/docs/alexa/custom-skills/request-and-response-json-reference.html</a>&hellip; ).</p>
+<p><strong>Steps</strong>:</p>
+<p>First we are going to write a new Alexa Skill using python sdk. For my POC, I am running the flask code on Ubuntu VM on Azure, and exposing it through flask based APIs.(this gives me more control for quick troubleshooting and installing &amp; testing packages).</p>
+<p><strong>1.</strong></p>
+<p><strong>1.1</strong> :  SDK for Alexa skills(ask-sdk-core) provides AbstractRequestHandler class for handling the voice commands and building response. Below is the method used for handling &ldquo;IntentRequest&rdquo; with intent name &ldquo;create&rdquo;. These requests should trigger a python ARM template to create the corresponding resource. I have wrapper the resource creation in deploy_and_confirm method in arm_deploy.py module.(explained more in step 2.1)</p>
+<p>POST call from Alexa NLU does not wait more than 8 seconds to return back the response to the user, and the resource creation definitely takes more than 8 seconds. Hence we have to use multi-threading here(to trigger resource creation) and respond back to user immidiately with &ldquo;Request submitted successfully&rdquo;.</p>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">  <span class="k">class</span> <span class="nc">CreateIntentReflectorHandler</span><span class="p">(</span><span class="n">AbstractRequestHandler</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;The intent reflector is used for interaction model testing and debugging.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    It will simply repeat the intent the user said. You can create custom handlers
+</span></span></span><span class="line"><span class="cl"><span class="s2">    for your intents by defining them above, then also adding them to the request
+</span></span></span><span class="line"><span class="cl"><span class="s2">    handler chain below.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">can_handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler_input</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># type: (HandlerInput) -&gt; bool</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ask_utils</span><span class="o">.</span><span class="n">is_request_type</span><span class="p">(</span><span class="s2">&#34;IntentRequest&#34;</span><span class="p">)(</span><span class="n">handler_input</span><span class="p">)</span> <span class="ow">and</span> \
+</span></span><span class="line"><span class="cl">            <span class="n">ask_utils</span><span class="o">.</span><span class="n">is_intent_name</span><span class="p">(</span><span class="s2">&#34;create&#34;</span><span class="p">)(</span><span class="n">handler_input</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handler_input</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># type: (HandlerInput) -&gt; Response</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#intent_name = ask_utils.get_intent_name(handler_input)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#if deploy_and_confirm(handler_input):</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">deploy_and_confirm</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;handler_input&#34;</span> <span class="p">:</span> <span class="n">handler_input</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">speak_output</span> <span class="o">=</span> <span class="s2">&#34;Request submitted successfully&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">handler_input</span><span class="o">.</span><span class="n">response_builder</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">speak_output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">speak_output</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="c1"># .ask(&#34;add a reprompt if you want to keep the session open for the user to respond&#34;)</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="n">response</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span></span></span></code></pre></div>
+<br>
+<br>
+<strong>1.2</strong> : Next, we need to create a SkillBuilder object and associate the created IntentHandlers with it. Skill builder object act like entry point for the skill, and routes all request and response to/from the handlers. They also handle the exceptions in case the request is not handled correctly, and responds back appropriately(since exceptions have no meaning for Alexa NLU).</p>
+<p><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ask_sdk_core.skill_builder</span> <span class="kn">import</span> <span class="n">SkillBuilder</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sb</span> <span class="o">=</span> <span class="n">SkillBuilder</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">LaunchRequestHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">HelloWorldIntentHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">HelpIntentHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">CancelOrStopIntentHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">FallbackIntentHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">SessionEndedRequestHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_request_handler</span><span class="p">(</span><span class="n">CreateIntentReflectorHandler</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sb</span><span class="o">.</span><span class="n">add_exception_handler</span><span class="p">(</span><span class="n">CatchAllExceptionHandler</span><span class="p">())</span></span></span></code></pre></div>
+/
+/
+<strong>1.3</strong> : Now we need to route all incoming requests(to /api URI) which hit the flask app, towards the skill builder object, so that it can be handled by the handler classes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">skill_response</span> <span class="o">=</span> <span class="n">SkillAdapter</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">skill</span><span class="o">=</span><span class="n">sb</span><span class="o">.</span><span class="n">create</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">skill_id</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;ALEXA_SKILL_ID&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">verifiers</span><span class="o">=</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">skill_response</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> <span class="n">route</span><span class="o">=</span><span class="s2">&#34;/api&#34;</span><span class="p">)</span> <span class="c1"># Route API calls to /api towards skill response</span></span></span></code></pre></div>
+<p><strong>Step 2</strong>: Let&rsquo;s integrate the above skill with python package to create azure resource using ARM template.</p>
+<p><strong>2.1</strong> : The deploy_and_confirm method is calling another python package azure_python_arm_deployer, which consumes the azure python sdk to create resources, by abstracting the boilerplate code. While deploying, we specify the resource group and region for deploying the resource.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">azure_python_arm_deployer</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">MAPPING_FILE_NAME</span> <span class="o">=</span> <span class="s2">&#34;intent_to_template_mapping.json&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">parse_mapping_file</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">MAPPING_FILE_NAME</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">deploy_and_confirm</span><span class="p">(</span><span class="n">handler_input</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">deployer</span> <span class="o">=</span> <span class="n">azure_python_arm_deployer</span><span class="o">.</span><span class="n">ArmTemplateDeployer</span><span class="p">(</span><span class="s2">&#34;ALEXAARMINTEGRATION&#34;</span><span class="p">,</span> <span class="s2">&#34;eastus&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">intent_to_template_map</span> <span class="o">=</span> <span class="n">parse_mapping_file</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">deployer</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">intent_to_template_map</span><span class="p">[</span><span class="n">handler_input</span><span class="o">.</span><span class="n">request_envelope</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">intent</span><span class="o">.</span><span class="n">name</span><span class="p">][</span><span class="n">handler_input</span><span class="o">.</span><span class="n">request_envelope</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">intent</span><span class="o">.</span><span class="n">slots</span><span class="p">[</span><span class="s2">&#34;resourceName&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">][</span><span class="s2">&#34;template_name&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Exception is:</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span></span></span></code></pre></div></p>
+<p><strong>2.2</strong> : Now, we need to create a intent to template mapping json structure, which maps the intent &ldquo;create&rdquo; with slot name &ldquo;Linux vm&rdquo; and returns back a pre-defined ARM template &ldquo;101-vm-simple-linux&rdquo; . This template is checked into the package azure-python-arm-deployer , and will be used to create corresponding linux vm.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;create&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Linux vm&#34;</span> <span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;template_name&#34;</span> <span class="p">:</span> <span class="s2">&#34;101-vm-simple-linux&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div>
+<p><strong>2.3</strong> : Create environment variables for skill ID, tenant ID, subscription ID, client ID(which has authorization to create azure resources) and client secret.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AZURE_CLIENT_ID</span><span class="o">=</span><span class="s2">&#34;********-****-****-****-********&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AZURE_CLIENT_SECRET</span><span class="o">=</span><span class="s2">&#34;**********************&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AZURE_SUBSCRIPTION_ID</span><span class="o">=</span><span class="s2">&#34;******-****-****-****-**********&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">AZURE_TENANT_ID</span><span class="o">=</span><span class="s2">&#34;********-****-****-****-*********&#34;</span></span></span></code></pre></div>
+<p><strong>Step 3</strong>: Let&rsquo;s create our Skill definition now on Alexa developer console(<a href="https://developer.amazon.com/" target="_blank" rel="noopener noreffer">https://developer.amazon.com/</a> ) . Once the skill is created, we need to go back to the step 2.3 and add a env variable for : ALEXA_SKILL_ID as well, since the skills api use it for validation.</p>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png" data-sub-html="<h2>Adding a new skill.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-1.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png, images/Step3-1.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-1.png">
+    </a><figcaption class="image-caption">Adding a new skill.</figcaption>
+    </figure>
+<p>Let&rsquo;s create the invocation &ldquo;azure cloud&rdquo;:</p>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png" data-sub-html="<h2>Adding invocation Azure cloud.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-2.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png, images/Step3-2.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-2.png">
+    </a><figcaption class="image-caption">Adding invocation Azure cloud.</figcaption>
+    </figure>
+<p><br>
+<br>
+Now for the fun part, let&rsquo;s create a custom intent : create , apart from the pre-defined required intents(defined by Amazon to enable other functionality like Cancel intent, help etc.). This intent would use sample utterance: to create a new {resourceName} &amp; to create a {resourceName} , wherein resourceName is the slotname with accepted values like (linux vm, storage account, windows vm, etc.).
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png" data-sub-html="<h2>Creating a custom intent.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-3.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png, images/Step3-3.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-3.png">
+    </a><figcaption class="image-caption">Creating a custom intent.</figcaption>
+    </figure>
+<br>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png" data-sub-html="<h2>Adding a validation rule.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-4.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png, images/Step3-4.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-4.png">
+    </a><figcaption class="image-caption">Adding a validation rule.</figcaption>
+    </figure>
+<br>
+<br>
+Next, we need to specify the endpoint for redirecting the requests to be processed by backend skills API. For testing, the endpoint configuration supports uploading a self-signed certificate(generated by VM running the flask application as created in Step 1.). Please follow steps mentioned in <a href="https://developer.amazon.com/en-US/docs/alexa/custom-skills/configure-web-service-self-signed-certif" target="_blank" rel="noopener noreffer">https://developer.amazon.com/en-US/docs/alexa/custom-skills/configure-web-service-self-signed-certif</a>&hellip; to generate the certificate and upload it on endpoint configuration.
+<br>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png" data-sub-html="<h2>Specifying the service endpoint for backend skills API.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-5.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png, images/Step3-5.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-5.png">
+    </a><figcaption class="image-caption">Specifying the service endpoint for backend skills API.</figcaption>
+    </figure>
+<br>
+Ok, time to test it out now :) . The developer console give a tab &ldquo;Test&rdquo; wherein voice commands can be typed out and we can see the corresponding request input(json format), response output. We enter the command : <strong>ask azure cloud to create a linux vm</strong> , which is responded back by <strong>request submitted successfully</strong> . This response is sent by our skill API what we defined in step 1.
+<br>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png" data-sub-html="<h2>Testing out the voice command.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-6.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png, images/Step3-6.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-6.png">
+    </a><figcaption class="image-caption">Testing out the voice command.</figcaption>
+    </figure>
+<br>
+Let&rsquo;s see what is happening on the Azure management portal. The registered app: <strong>arm-templates-app</strong> (which we entered in step 2.3, and has the Contributor role assignment at the resource group level) has now created a new VM.
+<br>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png" data-sub-html="<h2>Activity logs on Azure portal.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-7.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png, images/Step3-7.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-7.png">
+    </a><figcaption class="image-caption">Activity logs on Azure portal.</figcaption>
+    </figure>
+<br>
+After a while, we can see the VM in portal &gt; Virtual Machines .
+<br>
+<figure><a class="lightgallery" href="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png" title="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png" data-thumbnail="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png" data-sub-html="<h2>VM provisioned can be seen on Azure portal.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/Step3-8.png"
+            data-srcset="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png, images/Step3-8.png 1.5x, /posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png 2x"
+            data-sizes="auto"
+            alt="/posts/alexa-ask-azure-cloud-create-a-linux-vm/images/Step3-8.png">
+    </a><figcaption class="image-caption">VM provisioned can be seen on Azure portal.</figcaption>
+    </figure>
+<br>
+Moreover, we can keep expanding the skill definition, intents and slots to perform a wider range of operations on Azure.</p>
+<hr>
+<p><em>Reference :</em></p>
+<p><em>Originally published at: <a href="https://techcommunity.microsoft.com/t5/apps-on-azure-blog/alexa-ask-azure-cloud-to-create-a-linux-vm/ba-p/2585383" target="_blank" rel="noopener noreffer">https://techcommunity.microsoft.com/t5/apps-on-azure-blog/alexa-ask-azure-cloud-to-create-a-linux-vm/ba-p/2585383</a></em></p>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-05-17</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tech/">tech</a>,&nbsp;<a href="/tags/azure/">Azure</a>,&nbsp;<a href=""></a>,&nbsp;<a href=""></a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/how-managed-identities-work-on-azure-resources/" class="prev" rel="prev" title="How managed identities work on Azure resources"><i class="fas fa-angle-left fa-fw"></i>How managed identities work on Azure resources</a>
+            <a href="/posts/sla-implications-evaluation-and-business-outcomes/" class="next" rel="next" title="Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes">Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.0-DEV">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+
+<div class="pjax-assets"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script></div>
+</body>
+
+</html>

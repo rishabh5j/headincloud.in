@@ -3,12 +3,39 @@
         <title>All Posts - headincloud.in</title>
         <link>http://www.headincloud.in/posts/</link>
         <description>All Posts | headincloud.in</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 14 May 2022 03:25:53 &#43;0530</lastBuildDate><atom:link href="http://www.headincloud.in/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>First_post</title>
-    <link>http://www.headincloud.in/posts/first_post/</link>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 21 May 2022 09:24:06 &#43;0530</lastBuildDate><atom:link href="http://www.headincloud.in/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Building a Scalable and Reliable E Commerce Website on Azure</title>
+    <link>http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/</link>
+    <pubDate>Sat, 21 May 2022 09:24:06 &#43;0530</pubDate><author>
+                    <name>Rishabh Jain</name><uri>http://www.headincloud.in/authors/rishabh-jain</uri></author><guid>http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.png" referrerpolicy="no-referrer">
+            </div>Following the 5 pillars of great architecture on Azure to build a scalable and reliable e-commerce website, I have been getting my hands dirty for quite some time now. Now that it&rsquo;s complete(up and running at https://ecomwebsitefrontend.azurewebsites.net/) , so please go ahead and test it out and order requests for yourself. These order requests are bogus of-course and just to test out the functionality. The email-Id you mention will be used to send out notifications to you, so pls keep it apt), I would like to share the massive advantages of hosting apps on Azure, and the value it bring to a customer.]]></description>
+</item><item>
+    <title>Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes</title>
+    <link>http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/</link>
+    <pubDate>Thu, 19 May 2022 12:01:00 &#43;0530</pubDate><author>
+                    <name>Rishabh Jain</name><uri>http://www.headincloud.in/authors/rishabh-jain</uri></author><guid>http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.png" referrerpolicy="no-referrer">
+            </div>When we talk about designing highly available applications or architecture on public cloud, SLA is one of the single most important component to determine the service availability. It’s calculation and outcome directly influences the business and customer-service provider trust. Let’s give some time understanding it better. Service Level Agreement is a commitment or agreement between customer and the service provider(of sorts) which calculates the standard of service being offered. Failing to meet these standards would mean a financial reimbursement or service credits being incurred on the service-provider.]]></description>
+</item><item>
+    <title>Alexa Ask Azure Cloud to Create a Linux Vm</title>
+    <link>http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/</link>
+    <pubDate>Tue, 17 May 2022 19:28:00 &#43;0530</pubDate><author>
+                    <name>Rishabh Jain</name><uri>http://www.headincloud.in/authors/rishabh-jain</uri></author><guid>http://www.headincloud.in/posts/alexa-ask-azure-cloud-create-a-linux-vm/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.png" referrerpolicy="no-referrer">
+            </div>Wouldn&rsquo;t it be amazing if you could create resources on Azure with just one voice command?! In this step-by-step guide, I list and explain the detailed steps for achieving this. On a high level, below is the proceedure : Write a new Alexa Skill using python sdk and run it on a Azure VM/Azure Web App/Azure function. Expose this skill using flask API/Web apps native API. (Reference : https://github.com/rishabh5j/alexa-azure-integration ) Integrate the Alexa skill with python wrapper for Azure sdk, to enable provisioning resources using ARM templates.]]></description>
+</item><item>
+    <title>How managed identities work on Azure resources</title>
+    <link>http://www.headincloud.in/posts/how-managed-identities-work-on-azure-resources/</link>
     <pubDate>Sat, 14 May 2022 03:25:53 &#43;0530</pubDate><author>
-        <name>Author</name>
-    </author><guid>http://www.headincloud.in/posts/first_post/</guid>
-    <description><![CDATA[]]></description>
+                    <name>Rishabh Jain</name><uri>http://www.headincloud.in/authors/rishabh-jain</uri></author><guid>http://www.headincloud.in/posts/how-managed-identities-work-on-azure-resources/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/featured-image.png" referrerpolicy="no-referrer">
+            </div>One of the most common challenge faced by developers while maintaining source code on Azure resources is: how to store and retrieve the secrets without having to save any credentials whatsoever. Moreover, this is strictly discouraged in accordance with Defence-in-depth approach.
+Managed identities on Azure solve this challenge by assigning service principals to the identities on Azure AD.
+To understand how it works, let&rsquo;s build a setup with Ubuntu VM running on Azure, Key Vault to fetch secrets, and Azure AAD to register the VM as a managed identity.]]></description>
 </item></channel>
 </rss>

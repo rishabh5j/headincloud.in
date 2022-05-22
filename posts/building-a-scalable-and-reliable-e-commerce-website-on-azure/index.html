@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title class="pjax-title">Building a Scalable and Reliable E Commerce Website on Azure - headincloud.in</title><meta name="Description" content=""><meta property="og:title" content="Building a Scalable and Reliable E Commerce Website on Azure" />
+<meta property="og:description" content="Following the 5 pillars of great architecture on Azure to build a scalable and reliable e-commerce website, I have been getting my hands dirty for quite some time now. Now that it&rsquo;s complete(up and running at https://ecomwebsitefrontend.azurewebsites.net/) , so please go ahead and test it out and order requests for yourself. These order requests are bogus of-course and just to test out the functionality. The email-Id you mention will be used to send out notifications to you, so pls keep it apt), I would like to share the massive advantages of hosting apps on Azure, and the value it bring to a customer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/" /><meta property="og:image" content="http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-21T09:24:06+05:30" />
+<meta property="article:modified_time" content="2022-05-21T09:24:06+05:30" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png"/>
+<meta name="twitter:title" content="Building a Scalable and Reliable E Commerce Website on Azure"/>
+<meta name="twitter:description" content="Following the 5 pillars of great architecture on Azure to build a scalable and reliable e-commerce website, I have been getting my hands dirty for quite some time now. Now that it&rsquo;s complete(up and running at https://ecomwebsitefrontend.azurewebsites.net/) , so please go ahead and test it out and order requests for yourself. These order requests are bogus of-course and just to test out the functionality. The email-Id you mention will be used to send out notifications to you, so pls keep it apt), I would like to share the massive advantages of hosting apps on Azure, and the value it bring to a customer."/>
+<meta name="application-name" content="headincloud.in">
+<meta name="apple-mobile-web-app-title" content="headincloud.in">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://www.headincloud.in/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/" /><link rel="prev" href="http://www.headincloud.in/posts/sla-implications-evaluation-and-business-outcomes/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Building a Scalable and Reliable E Commerce Website on Azure",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.headincloud.in\/posts\/building-a-scalable-and-reliable-e-commerce-website-on-azure\/"
+        },"genre": "posts","keywords": "tech, Azure","wordcount":  1105 ,
+        "url": "http:\/\/www.headincloud.in\/posts\/building-a-scalable-and-reliable-e-commerce-website-on-azure\/","datePublished": "2022-05-21T09:24:06+05:30","dateModified": "2022-05-21T09:24:06+05:30","publisher": {
+            "@type": "Organization",
+            "name": "Author"},"authors": [{
+                    "@type": "Person",
+                    "name": "Rishabh Jain"
+                }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="" header-mobile=""><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('' === 'light' || '' === 'dark' || '' === 'black') setTheme(''), saveTheme(''); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="headincloud.in">headincloud.in</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="Blog posts from the admin"> Posts </a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology"> Tags </a><a class="menu-item" href="/categories/" title="Tech categories"> Categories </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="headincloud.in">headincloud.in</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="Blog posts from the admin">Posts</a><a class="menu-item" href="/tags/" title="Tags to sort the blog posts based on technology">Tags</a><a class="menu-item" href="/categories/" title="Tech categories">Categories</a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Building a Scalable and Reliable E Commerce Website on Azure</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.headincloud.in/authors/rishabh-jain'>Rishabh Jain</a></span>
+                </span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1105 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        data-src="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png"
+        data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png 2x"
+        data-sizes="auto"
+        alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png"
+        title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/featured-image.png" height="1214" width="2712"></div><div class="content" id="content"><p>Following the 5 pillars of great architecture on Azure to build a scalable and reliable e-commerce website, I have been getting my hands dirty for quite some time now. Now that it&rsquo;s complete(up and running at <a href="https://ecomwebsitefrontend.azurewebsites.net/" target="_blank" rel="noopener noreffer">https://ecomwebsitefrontend.azurewebsites.net/</a>) , so please go ahead and test it out and order requests for yourself. These order requests are bogus of-course and just to test out the functionality. The email-Id you mention will be used to send out notifications to you, so pls keep it apt), I would like to share the massive advantages of hosting apps on Azure, and the value it bring to a customer. But before we begin, let&rsquo;s understand the expectations from the website first.</p>
+<p><strong>Requirements</strong>
+The website should be:</p>
+<ol>
+<li>Security : deliver payload securely. Restrict access based on least-priviledge principle. Keep access keys and code repo seperate. Use TLS only.</li>
+<li>Stateful: maintain state for users, orders and workflow in the event of failures.</li>
+<li>Scalable: Allow each component to be massively scalable. Use PaaS wherever possible. Choose the right plan for each service.</li>
+<li>Reliable: each tier should be resilient to failures, with no noticiable impact to end-user.</li>
+<li>Latency sensitive: Static data should be delivered with as low latency as possible.</li>
+</ol>
+<p><br>
+<strong>Architecture</strong>
+Following the standard architecture from Microsoft Azure, the different technologies I used out of Azure stack are as below:</p>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png" data-sub-html="<h2>Architecture</h2>">
+        <img
+            class="lazyload"
+            data-src="images/1.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png, images/1.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/1.png">
+    </a><figcaption class="image-caption">Architecture</figcaption>
+    </figure>
+<ul>
+<li><strong>CDN</strong> : For this setup, the homepage product images are stored in the CDN. Azure CDN allows content caching for static data and massively improves the overall time to deliver the content, by delivering it from the nearest edge location. Here is what I observed during the setup. Image downloads taking 8-53 seconds per image, were observed to be downloaded on an average of 650ms ! Yes, that&rsquo;s right(I didn&rsquo;t believe it at first either) :)
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png" data-sub-html="<h2>Latency reduction with CDN</h2>">
+        <img
+            class="lazyload"
+            data-src="images/2.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png, images/2.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/2.png">
+    </a><figcaption class="image-caption">Latency reduction with CDN</figcaption>
+    </figure></li>
+</ul>
+<p><br>
+Azure Storage Account allows integration with CDN, so the images stored in blob container are automatically synchronized in the edge locations. This enables the admin to centrally store the blobs and not worry about the caching at edge POPs.</p>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png" data-sub-html="<h2>Setting CDN endpoint in Azure Storage account</h2>">
+        <img
+            class="lazyload"
+            data-src="images/3.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png, images/3.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/3.png">
+    </a><figcaption class="image-caption">Setting CDN endpoint in Azure Storage account</figcaption>
+    </figure>
+<ul>
+<li><strong>App Service</strong>s : For hosting web applications, Web App Service is the natural choice of PaaS solution(unless one wants to control the runtime stack as well). With the viewpoint for Continuous deployment, I integrated the web-app with Github repo. This is immensely helpful and reduces the management overhead(to conform with 2nd pillar of Architecture : Operational excellence). I used a python3.6 runtime stack since the source code is written in python as well, as I find it quick and dirty.</li>
+</ul>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png" data-sub-html="<h2>Web-App deployment center</h2>">
+        <img
+            class="lazyload"
+            data-src="images/4.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png, images/4.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/4.png">
+    </a><figcaption class="image-caption">Web-App deployment center</figcaption>
+    </figure>
+<ul>
+<li><strong>Azure Cache for Redis</strong> : Since the homepage is expected to be frequently accessed, Redis cache is used for caching the homepage, instead of rendering it from the html template again and again. The App service code first checks for the homepage in the cache, and retrieves and delivers to end user browser. Redis cache keeps a copy of the data in access memory which makes read operations quite fast, as compared to reading from blob storage or database.</li>
+</ul>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png" data-sub-html="<h2>Azure Cache</h2>">
+        <img
+            class="lazyload"
+            data-src="images/5.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png, images/5.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/5.png">
+    </a><figcaption class="image-caption">Azure Cache</figcaption>
+    </figure>
+<ul>
+<li><strong>SQL Database</strong> : This solution is using Azure SQL DB for maintaining states and records regarding the users, total products offered on the website, products in user&rsquo;s cart, and order&rsquo;s placed and their respective status(PENDING or DISPATCHED). The app service registers an order for the user in PENDING state, and Azure Function modifies it to dispatched state later(explained below.)</li>
+</ul>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png" data-sub-html="<h2>SQL Database</h2>">
+        <img
+            class="lazyload"
+            data-src="images/6.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png, images/6.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/6.png">
+    </a><figcaption class="image-caption">SQL Database</figcaption>
+    </figure>
+<p>I topped it up with writing a class to make read and write calls to the db(utilizing python package pyodbc. link in resources section)</p>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png" data-sub-html="<h2>.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/7.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png, images/7.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/7.png">
+    </a><figcaption class="image-caption">.</figcaption>
+    </figure>
+<p>Notice here, we are loading the secrets from the environment variables. Since we are running the webapp on Web App Service, the way to do it is by adding the key-value pair in web app &gt; Configuration &gt; Application settings</p>
+<figure><a class="lightgallery" href="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png" title="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png" data-thumbnail="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png" data-sub-html="<h2>.</h2>">
+        <img
+            class="lazyload"
+            data-src="images/8.png"
+            data-srcset="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png, images/8.png 1.5x, /posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png 2x"
+            data-sizes="auto"
+            alt="/posts/building-a-scalable-and-reliable-e-commerce-website-on-azure/images/8.png">
+    </a><figcaption class="image-caption">.</figcaption>
+    </figure>
+<ul>
+<li><strong>Queue Storage</strong> : Each order is considered as an event, which should trigger a workflow to send notification to the retailer about the order, and eventually changing the order status appropriately. Once an order is confirmed by the user, the webapp adds a message in the queue with orderId, userId, productId in JSON format. The messages in this queue are base64 encoded. The retrieving Function app has to perform the decoding and then load the json data.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">azure.storage.queue</span> <span class="kn">import</span> <span class="n">QueueService</span><span class="p">,</span> <span class="n">QueueMessageFormat</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">queue_service</span> <span class="o">=</span> <span class="n">QueueService</span><span class="p">(</span><span class="n">account_name</span><span class="o">=</span><span class="n">STORAGE_ACCOUNT_NAME</span><span class="p">,</span><span class="n">account_key</span><span class="o">=</span><span class="n">STORAGE_ACCESS_KEY</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add the order details in queue.</span>
+</span></span><span class="line"><span class="cl"><span class="n">queue_service</span><span class="o">.</span><span class="n">encode_function</span> <span class="o">=</span> <span class="n">QueueMessageFormat</span><span class="o">.</span><span class="n">binary_base64encode</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">queue_service</span><span class="o">.</span><span class="n">decode_function</span> <span class="o">=</span> <span class="n">QueueMessageFormat</span><span class="o">.</span><span class="n">binary_base64decode</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">queue_service</span><span class="o">.</span><span class="n">put_message</span><span class="p">(</span><span class="s2">&#34;orders&#34;</span><span class="p">,</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">queue_entry</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span></span></span></code></pre></div>
+<ul>
+<li><strong>Functions</strong> : We are using Queue message as the trigger for Azure Function. The new message is retrieved and b64 decoded, and then loaded as json object. The function then queries the database to modify the SQL DB and updates the order status to DISPATCHED. (for brevity, I have skipped a lot of phases in a generic e-com order lifecycle). Once this is done, the function then calls Azure SendGrid and sends out a notification mail to the end user mentioning the order is dispatched. Notice here : similar to the Web Apps, Functions also provides the flexibility to store the secrets in environment variables. (implemented here for SQL_DB_Password and SENGRID_API_KEY).
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">logging</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pyodbc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">azure.functions</span> <span class="k">as</span> <span class="nn">func</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sendgrid</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">sendgrid.helpers.mail</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">RESOURCE_GROUP</span> <span class="o">=</span> <span class="s1">&#39;EcomWebsiteRG&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">LOCATION</span> <span class="o">=</span> <span class="s1">&#39;eastus&#39;</span>  <span class="c1"># example Azure availability zone, should match resource group</span>
+</span></span><span class="line"><span class="cl"><span class="n">SQL_SERVER</span> <span class="o">=</span> <span class="s1">&#39;sqlserverecom.database.windows.net&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">SQL_DB</span> <span class="o">=</span> <span class="s1">&#39;UserDatabase&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">USERNAME</span> <span class="o">=</span> <span class="s1">&#39;user1&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">PASSWORD</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;SQL_DB_Password&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">sql_connection</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">=</span> <span class="s1">&#39;{ODBC Driver 17 for SQL Server}&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">pyodbc</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;DRIVER=&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">driver</span><span class="o">+</span><span class="s1">&#39;;SERVER=&#39;</span><span class="o">+</span><span class="n">SQL_SERVER</span><span class="o">+</span><span class="s1">&#39;;PORT=1433;DATABASE=&#39;</span><span class="o">+</span><span class="n">SQL_DB</span><span class="o">+</span><span class="s1">&#39;;UID=&#39;</span><span class="o">+</span><span class="n">USERNAME</span><span class="o">+</span><span class="s1">&#39;;PWD=&#39;</span><span class="o">+</span> <span class="n">PASSWORD</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">func</span><span class="o">.</span><span class="n">QueueMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">msg_body</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">get_body</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Python queue trigger function processed a queue item: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">msg_body</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">msg_body</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">orderId</span> <span class="o">=</span> <span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;orderId&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">sql_connection</span><span class="p">()</span><span class="o">.</span><span class="n">conn</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;UPDATE orders SET status = &#39;DISPATCHED&#39; WHERE userId = </span><span class="si">{</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;userId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> and orderId=</span><span class="si">{</span><span class="n">orderId</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OrderId:</span><span class="si">{</span><span class="n">orderId</span><span class="si">}</span><span class="s1"> updated to dispatched in table&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;SELECT email FROM users where CONVERT(VARCHAR, userid)=</span><span class="si">{</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;userId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">email_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#Send mail notifying order dispatched</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sending mail to :</span><span class="si">{</span><span class="n">email_id</span><span class="si">}</span><span class="s1"> . &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sg</span> <span class="o">=</span> <span class="n">sendgrid</span><span class="o">.</span><span class="n">SendGridAPIClient</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&#34;SENGRID_API_KEY&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">from_email</span> <span class="o">=</span> <span class="n">Email</span><span class="p">(</span><span class="s2">&#34;rj.ietf@gmail.com&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">to_email</span> <span class="o">=</span> <span class="n">To</span><span class="p">(</span><span class="n">email_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subject</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;Order ID:</span><span class="si">{</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;orderId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> is dispatched.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">content</span> <span class="o">=</span> <span class="n">Content</span><span class="p">(</span><span class="s2">&#34;text/plain&#34;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&#34;We have dispatched your order:</span><span class="si">{</span><span class="n">data_json</span><span class="p">[</span><span class="s1">&#39;orderId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">. But don&#39;t expect to receive it :-p&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mail</span> <span class="o">=</span> <span class="n">Mail</span><span class="p">(</span><span class="n">from_email</span><span class="p">,</span> <span class="n">to_email</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">sg</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">request_body</span><span class="o">=</span><span class="n">mail</span><span class="o">.</span><span class="n">get</span><span class="p">())</span></span></span></code></pre></div></li>
+</ul>
+<p><br>
+<br>
+<br>
+<strong>Resources and references</strong></p>
+<ul>
+<li>Architect scalable e-commerce web app: <a href="https://docs.microsoft.com/en-us/azure/architecture/solution-ideas/articles/scalable-ecommerce-web-app" target="_blank" rel="noopener noreffer">https://docs.microsoft.com/en-us/azure/architecture/solution-ideas/articles/scalable-ecommerce-web-app</a></li>
+<li>Front end code : <a href="https://github.com/HarshShah1997/Shopping-Cart" target="_blank" rel="noopener noreffer">https://github.com/HarshShah1997/Shopping-Cart</a> . This has been largely modified in my private fork, for functionalities as mentioned above.</li>
+<li>Using Python to query Azure SQL database: <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-python?tabs=windows" target="_blank" rel="noopener noreffer">https://docs.microsoft.com/en-us/azure/azure-sql/database/connect-query-python?tabs=windows</a></li>
+<li>Azure Queue Storage Trigger for Azure Functions : <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=python" target="_blank" rel="noopener noreffer">https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-queue-trigger?tabs=python</a></li>
+<li>Integrate Azure Storage Account with CDN : <a href="https://docs.microsoft.com/en-us/azure/cdn/cdn-create-a-storage-account-with-cdn" target="_blank" rel="noopener noreffer">https://docs.microsoft.com/en-us/azure/cdn/cdn-create-a-storage-account-with-cdn</a></li>
+</ul>
+</div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-05-21</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tech/">tech</a>,&nbsp;<a href="/tags/azure/">Azure</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/sla-implications-evaluation-and-business-outcomes/" class="prev" rel="prev" title="Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes"><i class="fas fa-angle-left fa-fw"></i>Service Level Agreement(SLA) : Implications, evaluation &amp; business outcomes</a></div>
+</div>
+</article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.99.0-DEV">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreffer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer"></a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/topbar/topbar.min.js"></script><script type="text/javascript" src="/lib/pjax/pjax.min.js"></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+
+<div class="pjax-assets"><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script></div>
+</body>
+
+</html>
